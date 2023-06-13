@@ -1,2 +1,2 @@
 #!/bin/bash
-set | grep -Eo '^[[:alpha:]_][[:alnum:]_]*=' | printenv | declare -F | less
+set
