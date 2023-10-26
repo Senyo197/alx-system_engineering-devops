@@ -7,13 +7,13 @@ while ((i <= 20))
 do
 	case $i in
 		4)
-			echo "$i and then bad luck from China"
+			echo "bad luck from China"
 			;;
 		9)
-			echo "$i and then bad luck from Japan"
+			echo "bad luck from Japan"
 			;;
 		17)
-			echo "$i and then bad luck from Italy"
+			echo "bad luck from Italy"
 			;;
 		*)
 			echo $i
