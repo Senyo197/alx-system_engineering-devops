@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# A bash script that display files in a list format
+
+for file in *
+do
+	if [ -f "$file" ] && [[ "$file" != .* ]]
+	then
+		filename="$file"
+		echo "$filename"
+	fi
+done
