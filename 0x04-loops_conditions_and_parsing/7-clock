@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+hour=0
+
+while ((hour <= 12))
+do
+
+	min=1
+
+	while ((min <= 59))
+	do
+		formatted_hour=$(printf "%02d" "$hour")
+		formatted_min=$(printf "%02d" "$min")
+
+		echo "$formatted_hour:$formatted_min"
+		((min++))
+	done
+
+	((hour++))
+done
