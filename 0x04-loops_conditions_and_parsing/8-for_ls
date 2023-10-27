@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 # A bash script that display files in a list format
 
-for file in *
+list=$(ls)
+for file in $list
 do
-	if [ -f "$file" ] && [[ "$file" != .* ]]
-	then
-		filename="$file"
-		echo "$filename"
-	fi
+	echo "$file" | cut -d '-' -f2-
 done
