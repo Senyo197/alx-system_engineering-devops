@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#A bash script to kill the infinity beyound process
+
+pkill -f 7-highlander
