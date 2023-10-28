@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#Displaying script's own pid
+
+echo "$$"
