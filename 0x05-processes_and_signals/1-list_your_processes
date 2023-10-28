@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#Display list current running processes
+
+ps -e f -o user,pid,ppid,pgid,cmd --forest
