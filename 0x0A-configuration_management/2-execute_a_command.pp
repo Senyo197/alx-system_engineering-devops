@@ -1,6 +1,7 @@
 #Killing a process
 
-exec { 'pkill':
-  command  => 'pkill killmenow'
-  provider => 'shell'
+exec { 'killmenow':
+  command  => 'usr/bin/pkill killmenow',
+  provider => 'shell',
+  returns  => {0, 1},
 }
