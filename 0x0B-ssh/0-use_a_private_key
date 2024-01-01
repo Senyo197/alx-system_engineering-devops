@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# A Bash script that uses ssh to connect to your server using the private key ~/.ssh/school with the user ubuntu
+
+#Set the server address
+server_address="422693-web-01"
+
+#Set the private key path
+private_key="~/.ssh/school"
+
+#Set the username
+username="ubuntu"
+
+#SSH connection using single-character-flag
+ssh -i "$private_key" "$username@$server_address"
