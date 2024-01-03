@@ -1,32 +1,49 @@
-#!/usr/bin/env bash
-# A bash script to install Nginx with the following configurations:
-#+    Nginx should listen on port 80.
-#+    should return a page containing "Hello World!" when queried
-#++    at the root with a curl GET request.
-
-# Updates the package list for available software packages
-apt-get update
-
-# Installs the Nginx web server
-apt-get install -y nginx
-
-# Creates the /etc/nginx/html directory, which will serve as the document root directory for Nginx
-mkdir /etc/nginx/html
-
-# Creates an empty index.html file inside the /etc/nginx/html directory
-touch /etc/nginx/html/index.html
-
-# Sets the content of the index.html file to "Hello World!" using the echo command.
-echo "Hello World!" > /etc/nginx/html/index.html
-
-# Sets Nginx to listen on port 80 and serve files from the /etc/nginx/html directory.
-printf %s "server {
-     listen      80;
-     listen      [::]:80 default_server;
-     root        /etc/nginx/html;
-     index       index.html index.htm;
-}
-" > /etc/nginx/sites-available/default
-
-# Restarts the Nginx service to apply the configuration changes.
-	service nginx restart
+-----BEGIN OPENSSH PRIVATE KEY-----
+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
+-----END OPENSSH PRIVATE KEY-----
