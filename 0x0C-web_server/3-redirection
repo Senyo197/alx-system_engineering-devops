@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
-# A bash script to install Nginx with the following configurations:
-#+    Nginx should listen on port 80.
-#+    should return a page containing "Hello World!" when queried
+# Installs Nginx with the following configurations:
+#+    Listens on port 80.
+#+    Returns a page containing "Hello World!" when queried
 #++    at the root with a curl GET request.
 
-# Updates the package list for available software packages
+#  updates the package lists for available software packages.
 apt-get update
 
-# Installs the Nginx web server
+# installs the Nginx web server.
 apt-get install -y nginx
 
-# Creates the /etc/nginx/html directory, which will serve as the document root directory for Nginx
+# Creates the /etc/nginx/html directory, which will serve as the document root directory for Nginx.
 mkdir /etc/nginx/html
 
-# Creates an empty index.html file inside the /etc/nginx/html directory
+#  creates an empty index.html file inside the /etc/nginx/html directory.
 touch /etc/nginx/html/index.html
 
-# Sets the content of the index.html file to "Hello World!" using the echo command.
+#  sets the content of the index.html file to "Hello World!" using the echo command.
 echo "Hello World!" > /etc/nginx/html/index.html
 
 # Sets Nginx to listen on port 80 and serve files from the /etc/nginx/html directory.
@@ -27,9 +27,6 @@ printf %s "server {
      index       index.html index.htm;
 }
 " > /etc/nginx/sites-available/default
-
-# Create the root directory for the redirection server block
-mkdir -p /var/www/html
 
 # Configure a new server block for redirection
 echo "server {
@@ -42,13 +39,14 @@ echo "server {
     index index.html index.htm index.nginx-debian.html;
 
     location /redirect_me {
-        return 301 http://peaceg.tech;
+        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
     }
 }" | sudo tee /etc/nginx/sites-available/redirect
 
 # Enable the new site configuration
 sudo ln -s /etc/nginx/sites-available/redirect /etc/nginx/sites-enabled/
 
-# Restarts the Nginx service to apply the configuration changes.
+
+# Test Nginx configuration and reload
 sudo nginx -t
-service nginx restart
+sudo service nginx reload
