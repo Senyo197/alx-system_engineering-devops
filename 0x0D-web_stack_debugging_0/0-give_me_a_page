@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Fix server with servername pointing to localhost
+service apache2 restart
