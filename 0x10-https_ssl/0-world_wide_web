@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# A Bash script that configures a sub-domain to a load balancer
+
+# Function to display information about domain subdomains
+world_wide_web () {
+    local domain="$1"
+    local subdomain="$2"
+
+    # Check if subdomain parameter is provided
+    if [ "$subdomain" ]
+    then
+        # Query DNS for the specified subdomain
+        rec=$(dig "$subdomain.$domain" | grep 'ANSWER SECTION:' -A1 | awk '{if (NR > 1) {print $4}}')
+        ip=$(dig "$subdomain.$domain" | grep 'ANSWER SECTION:' -A1 | awk '{if (NR > 1) {print $5}}')
+        echo "The subdomain $subdomain is a $rec record and points to $ip"
+    else
+        # If no subdomain specified, display information for default subdomains
+        for i in "www" "lb-01" "web-01" "web-02"; do
+            rec=$(dig "$i.$domain" | grep 'ANSWER SECTION:' -A1 | awk '{if (NR > 1) {print $4}}')
+            ip=$(dig "$i.$domain" | grep 'ANSWER SECTION:' -A1 | awk '{if (NR > 1) {print $5}}')
+            echo "The subdomain $i is a $rec record and points to $ip"
+        done
+    fi
+
+    return 0
+}
+
+# Check if both domain and subdomain parameters are provided
+if [ "$2" ]
+then
+    world_wide_web "$1" "$2"
+else
+    # Display usage information if parameters are missing
+    world_wide_web "$1"
+    exit 1
+fi
