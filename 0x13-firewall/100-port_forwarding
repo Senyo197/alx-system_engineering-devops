@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Flush existing rules and set default policies
+sudo iptables -F
+sudo iptables -P INPUT ACCEPT
+sudo iptables -P FORWARD ACCEPT
+sudo iptables -P OUTPUT ACCEPT
+
+# Redirect traffic from port 8080 to port 80
+sudo iptables -t nat -A PREROUTING -p tcp --dport 8080 -j REDIRECT --to-port 80
+
+# Save the rules to persist across reboots
+sudo iptables-save > /etc/iptables/rules.v4
+
+# Ensure the iptables-persistent package is installed
+sudo apt-get install -y iptables-persistent
+
+# Save IPv6 rules if needed
+sudo ip6tables-save > /etc/iptables/rules.v6
+
+# Restart the networking service to apply changes
+sudo service networking restart
