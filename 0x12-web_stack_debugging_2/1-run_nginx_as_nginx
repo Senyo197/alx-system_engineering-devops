@@ -9,7 +9,7 @@ pkill apache2
 
 # Correct file permissions and ownership for nginx configuration file
 chmod 644 /etc/nginx/nginx.conf
-chown nginx:nginx /etc/nginx/nginx.conf
+sudo chown nginx:nginx /etc/nginx/ -R
 
 # Modify the default nginx configuration file
 su -s /bin/bash -c "sed -i 's/80/8080/g' /etc/nginx/sites-available/default" nginx
