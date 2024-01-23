@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Fixing server
+
+# Stop Apache2 service
+service apache2 stop 2>/dev/null || systemctl stop apache2 2>/dev/null
+
+# Kill any remaining Apache2 processes
+pkill apache2
+
+# Correct file permissions and ownership for nginx configuration file
+chmod 644 /etc/nginx/nginx.conf
+chown nginx:nginx /etc/nginx/nginx.conf
+
+# Modify the default nginx configuration file
+su -s /bin/bash -c "sed -i 's/80/8080/g' /etc/nginx/sites-available/default" nginx
+
+# Restart nginx service
+su -s /bin/bash -c "service nginx restart" nginx 2>/dev/null || systemctl restart nginx 2>/dev/null
