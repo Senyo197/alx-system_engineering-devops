@@ -1,5 +1,5 @@
 -- Create a new user 'replica_user' with a wildcard host (%), and set a password.
-CREATE USER 'replica_user'@'%' IDENTIFIED BY 'web-01';
+CREATE USER 'replica_user'@'%' IDENTIFIED WITH 'mysql_native_password' BY 'web-01';
 
 -- Grant replication privileges to 'replica_user' on all databases and tables.
 GRANT REPLICATION SLAVE ON *.* TO 'replica_user'@'%';

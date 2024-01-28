@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# This script creates a dump of MySQL databases and compresses it into a tar.gz file.
+
+# Usage: ./backup_script.sh <mysql_password>
+
+# Extract the MySQL password from the command-line argument
+mysql_password="$1"
+
+# Create a dump of all MySQL databases with events
+mysqldump -u root --password="$mysql_password" -A --events > backup.sql
+
+# Get the current date in the format: dd-mm-yyyy
+file_name=$(date +"%d-%m-%Y")
+
+# Compress the SQL dump into a tar.gz file with the current date as the filename
+tar -czvf "$file_name".tar.gz backup.sql
+
+# Clean up: Optionally, you may want to remove the intermediate SQL dump file
+# Uncomment the line below if you want to remove the backup.sql file after creating the compressed archive
+# rm backup.sql
