@@ -6,6 +6,7 @@
     the function should return None
 """
 
+
 import requests
 
 
